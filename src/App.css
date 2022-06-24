@@ -1,19 +1,19 @@
 .form {
   padding: 16px;
+
 }
 .form-field + .form-field {
   margin-top: 16px;
-  background-color: pink;
 }
 .label {
   margin-top: 8px;
-
+  
 }
 .input {
   min-height: 32px;
   border: 1px solid black;
   padding: 0 8px;
-
+  background-color: pink;
 }
 .button {
   min-height: 32px;
