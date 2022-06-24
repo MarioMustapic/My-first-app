@@ -17,7 +17,7 @@
 .button {
   min-height: 32px;
   border: 1px solid black;
-  background: black;
+  background: pink;
   color: white;
   padding: 0 8px;
 }
