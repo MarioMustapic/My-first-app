@@ -3,6 +3,7 @@
 }
 .form-field + .form-field {
   margin-top: 16px;
+  background-color: pink;
 }
 .label {
   margin-top: 8px;
