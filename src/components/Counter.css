@@ -3,4 +3,10 @@
     padding: 16px;
     background: teal;
     color: white;
+    border: 2px solid black;
+    margin: 5px;
+}
+.counter + .counter{
+    margin-left: 1px;
+
 }
