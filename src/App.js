@@ -3,6 +3,7 @@ import { InputElement} from "./components/InputElement";
 import Button from "./components/Button";
 import FormMessage from "./components/FormMessage";
 import FormError from "./components/FormError";
+import {User} from "./components/User"
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
     </div>
     <FormError visible={!isSignedIn} />
     <FormMessage visible={isSignedIn} />
-    
+    <User username={"Mario Mustapić"} src={"../public/Avatar.jpg"} alt={"Avatar Picture"}/>
   </form>
   );
 }
