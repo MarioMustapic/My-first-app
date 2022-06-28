@@ -23,7 +23,7 @@ function App() {
     </div>
     <FormError visible={!isSignedIn} />
     <FormMessage visible={isSignedIn} />
-    <User username={"Mario Mustapić"} src={"../public/Avatar.jpg"} alt={"Avatar Picture"}/>
+    <User username={"Mario Mustapić"} src={"https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/208A0E5EB8E1ADCEE6DEE4149CFC1428BDAABFCE5A006D2F240ADD8B87F239A5/scale?width=1200&aspectRatio=1.78&format=jpeg"} alt={"Avatar Picture"}/>
   </form>
   );
 }
