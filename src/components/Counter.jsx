@@ -6,6 +6,8 @@ export function Counter (props) {
     const counter = counterState[0];
     const setCounter = counterState[1];
 
+    //const [counter, setCounter] = useState(props.startingState);
+
     const handleClickPlus = () => {
         setCounter((state) => ++state);
     }

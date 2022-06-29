@@ -5,29 +5,54 @@ import FormMessage from "./components/FormMessage";
 import FormError from "./components/FormError";
 import {User} from "./components/User";
 import {Counter} from "./components/Counter";
+import { useState } from "react";
 
 function App() {
-  const isSignedIn = true;
-  
+  const [formState, setFormState] = useState({ username: '', password: '' });
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (formState.password === 'password') {
+      setUser(formState);
+      setError(null);
+    } else {
+      setError(true);
+    }
+  }
+
+  const handleChange = (event) => {
+    setFormState((state) => ({
+          ...state,
+          [event.target.name]: event.target.value,
+    }));
+  }
+
+  const isSignedIn = user !== null;
+  const showErrorMessage = error !== null;
+  const showFormMessage = user !== null;
   return (
     <div>
       <Counter startingState={0}/>
-      {isSignedIn && <User username={"Mario Mustapić"} src={"https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/208A0E5EB8E1ADCEE6DEE4149CFC1428BDAABFCE5A006D2F240ADD8B87F239A5/scale?width=1200&aspectRatio=1.78&format=jpeg"}/>
+      <Counter startingState={10}/>
+      {isSignedIn && <User username={user.username} src={"https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/208A0E5EB8E1ADCEE6DEE4149CFC1428BDAABFCE5A006D2F240ADD8B87F239A5/scale?width=1200&aspectRatio=1.78&format=jpeg"}/>
       }
-    <form className="form">
+    {!isSignedIn && <form className="form" onSubmit={handleSubmit}>
     <div className="form-field">
-      <InputElement label="Username" type="text"/>
+      <InputElement label="Username" name="username" type="text" onChange={handleChange}/>
     </div>
     <div className="form-field">
-    <InputElement label="Password" type="password"/>
+    <InputElement label="Password" name="password" type="password" onChange={handleChange}/>
     </div>
     <div className="form-field">
-      <Button type="button">Sign in</Button>
+      <Button type="submit">Sign in</Button>
       <Button type="reset">Reset</Button>
     </div>
-    <FormError visible={!isSignedIn} />
-    <FormMessage visible={isSignedIn} />
-  </form>
+      <FormError visible={showErrorMessage} />
+      <FormMessage visible={showFormMessage} />
+    </form>}
   </div>
   );
 }
