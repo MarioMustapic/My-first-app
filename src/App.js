@@ -7,18 +7,18 @@ import {User} from "./components/User";
 import { useState } from "react";
 
 function App() {
-  const [formState, setFormState] = useState({ username: '', password: '' });
+  const [formState, setFormState] = useState({ username: '' });
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (formState.password === 'password') {
+    if (formState.password === '') {
+      setError(true);
+    } else {
       setUser(formState);
       setError(null);
-    } else {
-      setError(true);
     }
   }
 
@@ -44,9 +44,6 @@ function App() {
     {!isSignedIn && <form className="form" onSubmit={handleSubmit}>
     <div className="form-field">
       <InputElement label="Username" name="username" type="text" onChange={handleChange}/>
-    </div>
-    <div className="form-field">
-    <InputElement label="Password" name="password" type="password" onChange={handleChange}/>
     </div>
     <div className="form-field">
       <Button type="submit">Sign in</Button>
