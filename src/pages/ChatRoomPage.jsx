@@ -1,17 +1,22 @@
 import Button from "../components/Button";
 import { InputElement } from "../components/InputElement";
 import { User } from "../components/User";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function ChatRoomPage(props) {
   const [formState, setFormState] = useState({ message: '' });
   const [messages, setMessages] = useState([]);
+  const authorOfMessage = useState()
+
+  useEffect(() => {
+    console.log('New message stored!');
+  }, [messages]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (formState.message !== '') {
-      setMessages((state) => [...state, formState]);
+      setMessages((state) => [...state, {...formState, author:props.user.username}]);
       setFormState({ message: '' });
     }
   }
@@ -23,8 +28,12 @@ export function ChatRoomPage(props) {
     }));
   }
 
-  console.log(messages);
-
+  const messageElements = messages.map((item, index) => (
+    <div key={index}>
+      <div>{item.author}</div>
+      <div>{item.message}</div>
+    </div>
+  ));
   return (
     <div>
       <Button type="button" onClick={props.onSignOut}>Sign out</Button>
@@ -41,6 +50,7 @@ export function ChatRoomPage(props) {
           <Button type="submit">Send</Button>
         </div>
       </form>
+      {messageElements}
     </div>
   );
 }
