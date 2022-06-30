@@ -1,59 +1,30 @@
 import "./App.css";
-import { InputElement} from "./components/InputElement";
 import Button from "./components/Button";
-import FormMessage from "./components/FormMessage";
-import FormError from "./components/FormError";
-import {User} from "./components/User";
+import { User } from "./components/User";
 import { useState } from "react";
+import { SignInPage } from "./pages/SignInPage";
 
 function App() {
-  const [formState, setFormState] = useState({ username: '' });
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (formState.username === '') {
-      setError(true);
-    } else {
-      setUser(formState);
-      setError(null);
-      setFormState({username: ""});
-    }
+  const handleSignIn = (user) => {
+    setUser(user);
   }
 
-  const handleChange = (event) => {
-    setFormState((state) => ({
-          ...state,
-          [event.target.name]: event.target.value,
-    }));
-  }
-  const handleLogOff = () => {
+  const signOut = () => {
     setUser(null);
     setError(null);
   }
 
-
   const isSignedIn = user !== null;
-  const showErrorMessage = error !== null;
-  const showFormMessage = user !== null;
+
   return (
     <div>
-      {isSignedIn && <User username={user.username} src={"https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/208A0E5EB8E1ADCEE6DEE4149CFC1428BDAABFCE5A006D2F240ADD8B87F239A5/scale?width=1200&aspectRatio=1.78&format=jpeg"}/>
-      }
-    {!isSignedIn && <form className="form" onSubmit={handleSubmit}>
-    <div className="form-field">
-      <InputElement label="Username" name="username" type="text" onChange={handleChange}/>
+      {isSignedIn && <Button type="button" onClick={signOut}>Sign out</Button>}
+      {isSignedIn && <User src="/avatar.svg" username={user.username} />}
+      {!isSignedIn && <SignInPage onSignIn={handleSignIn} />}
     </div>
-    <div className="form-field">
-      <Button type="submit">Sign in</Button>
-    </div>
-      <FormError visible={showErrorMessage} />
-      <FormMessage visible={showFormMessage} />
-    </form>}
-    {isSignedIn && <Button onClick={handleLogOff}>Sign out</Button>}
-  </div>
   );
 }
 
