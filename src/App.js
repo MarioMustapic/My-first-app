@@ -4,7 +4,6 @@ import Button from "./components/Button";
 import FormMessage from "./components/FormMessage";
 import FormError from "./components/FormError";
 import {User} from "./components/User";
-import {Counter} from "./components/Counter";
 import { useState } from "react";
 
 function App() {
@@ -29,14 +28,17 @@ function App() {
           [event.target.name]: event.target.value,
     }));
   }
+  const handleLogOff = () => {
+    setUser(null);
+    setError(null);
+  }
+
 
   const isSignedIn = user !== null;
   const showErrorMessage = error !== null;
   const showFormMessage = user !== null;
   return (
     <div>
-      <Counter startingState={0}/>
-      <Counter startingState={10}/>
       {isSignedIn && <User username={user.username} src={"https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/208A0E5EB8E1ADCEE6DEE4149CFC1428BDAABFCE5A006D2F240ADD8B87F239A5/scale?width=1200&aspectRatio=1.78&format=jpeg"}/>
       }
     {!isSignedIn && <form className="form" onSubmit={handleSubmit}>
@@ -53,6 +55,7 @@ function App() {
       <FormError visible={showErrorMessage} />
       <FormMessage visible={showFormMessage} />
     </form>}
+    {isSignedIn && <Button onClick={handleLogOff}/>}
   </div>
   );
 }
