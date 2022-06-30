@@ -14,11 +14,12 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (formState.password === '') {
+    if (formState.username === '') {
       setError(true);
     } else {
       setUser(formState);
       setError(null);
+      setFormState({username: ""});
     }
   }
 
@@ -47,12 +48,11 @@ function App() {
     </div>
     <div className="form-field">
       <Button type="submit">Sign in</Button>
-      <Button type="reset">Reset</Button>
     </div>
       <FormError visible={showErrorMessage} />
       <FormMessage visible={showFormMessage} />
     </form>}
-    {isSignedIn && <Button onClick={handleLogOff}/>}
+    {isSignedIn && <Button onClick={handleLogOff}>Sign out</Button>}
   </div>
   );
 }
