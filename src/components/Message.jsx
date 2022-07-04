@@ -1,20 +1,23 @@
-import "./SelectElement.css";
+import "./Message.css";
 
-export function SelectElement(props) {
-  const optionElements = props.options.map((option, index) => (
-    <option key={index} value={option.value}>{option.label}</option>
-  ));
+import { Avatar } from "./Avatar";
+
+export function Message(props) {
+  const style = {
+    backgroundColor: props.settings.backgroundColor || "transparent",
+    color: props.settings.textColor || "black",
+  };
+
+  const author = props.settings.displayName || props.author;
+  const avatarSrc = props.settings.avatarUrl || "/avatar.jpg";
 
   return (
-    <label>
-       <div className="label">{props.label}</div>
-      <select
-        name={props.name}
-        onChange={props.onChange}
-        value={props.value}
-      >
-        {optionElements}
-      </select>
-    </label>
+    <div className="message" style={style}>
+      {props.settings.showAvatar && <div className="message__avatar">
+        <Avatar username={author} src={avatarSrc} />
+      </div>}
+      <div className="message__author">{author}</div>
+      <div className="message__text">{props.message}</div>
+    </div>
   );
 }
