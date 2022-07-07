@@ -9,8 +9,7 @@ import { MessageForm } from "../components/MessageForm";
 import { AppContext } from "../contexts/AppContext";
 
 export function ChatRoomPage(props) {
-  const { user } = useContext(AppContext);
-
+  const {user, clearUser} = useContext(AppContext);
   const [messages, setMessages] = useState([]);
   const [settings, setSettings] = useState({});
 
@@ -45,7 +44,7 @@ export function ChatRoomPage(props) {
           <User src="/avatar.svg" username={user.username} />
         </div>
         <div className="chat-room-page__settings-row">
-          <Button type="button" onClick={props.onSignOut}>Sign out</Button>
+          <Button type="button" onClick={clearUser}>Sign out</Button>
         </div>
         <div className="chat-room-page__settings-row">
           <SettingsForm onSubmit={updateSettings} />
