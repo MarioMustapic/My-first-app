@@ -2,12 +2,15 @@ import "./ChatRoomPage.css";
 
 import Button from "../components/Button";
 import { User } from "../components/User";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SettingsForm } from "../components/SettingsForm";
 import { Message } from "../components/Message";
 import { MessageForm } from "../components/MessageForm";
+import { AppContext } from "../contexts/AppContext";
 
 export function ChatRoomPage(props) {
+  const { user } = useContext(AppContext);
+
   const [messages, setMessages] = useState([]);
   const [settings, setSettings] = useState({});
 
@@ -20,7 +23,7 @@ export function ChatRoomPage(props) {
       ...state,
       {
         ...formState,
-        author: props.user.username,
+        author: user.username,
         settings: { ...settings },
       },
     ]);
@@ -39,13 +42,13 @@ export function ChatRoomPage(props) {
     <div className="chat-room-page">
       <div className="chat-room-page__settings">
         <div className="chat-room-page__settings-row">
-          <User src="/avatar.svg" username={props.user.username} />
+          <User src="/avatar.svg" username={user.username} />
         </div>
         <div className="chat-room-page__settings-row">
           <Button type="button" onClick={props.onSignOut}>Sign out</Button>
         </div>
         <div className="chat-room-page__settings-row">
-          <SettingsForm user={props.user} onSubmit={updateSettings} />
+          <SettingsForm onSubmit={updateSettings} />
         </div>
       </div>
       <div className="chat-room-page__chat">
