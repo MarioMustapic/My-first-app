@@ -24,11 +24,24 @@ root.render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/tos" element={<TermsOfServicePage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </AppProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );
+
+function PageNotFound() {
+  return (
+    <div>
+      <h1>404</h1>
+      <h2>Page not found</h2>
+      <p>
+        <Link to="/">Go to the home page</Link>
+      </p>
+    </div>
+  );
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

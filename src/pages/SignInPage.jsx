@@ -16,6 +16,7 @@ export function SignInPage() {
     <div className="sign-in-page">
         <SignInForm onSubmit={handleSubmit} />
         <Link to="/tos">Terms of Service</Link>
+        <Link to="placeholder">placeholder</Link>
     </div>
   );
 }
